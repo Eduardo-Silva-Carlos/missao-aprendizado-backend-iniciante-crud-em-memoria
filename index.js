@@ -36,6 +36,15 @@ app.post('/personagem', function (req, res) {
   //Acessamos a propriedade 'nome' do body
   const novoItem = body.nome
 
+  //Checa se o 'nome' esta presente no body
+  if (!novoItem) {
+    return res.send('Corpo da requisição conter a propriedade `nome`.')
+  }
+  // Checa se o novoItem está na lista ou não
+  if (lista.includes(novoItem)) {
+    return res.send('Esse item já existe na lista!')
+  }
+
   //Adicionamos nome na lista
   lista.push(novoItem)
 
@@ -43,6 +52,7 @@ app.post('/personagem', function (req, res) {
   res.send('Item adicionado com sucesso:' + novoItem)
 
 })
+
 //EndPoint Update [PUT]/personagem/:id 
 app.put('/personagem/:id', function (req, res) {
   //Acessamos o ID dos parâmetros da rota
@@ -54,6 +64,14 @@ app.put('/personagem/:id', function (req, res) {
   // Acessamos a propriedade nome do Bory
   const novoItem = bory.nome
 
+  //Checa se o 'nome' esta presente no body
+  if (!novoItem) {
+    return res.send('Corpo da requisição conter a propriedade `nome`.')
+  }
+  // Checa se o novoItem está na lista ou não
+  if (lista.includes(novoItem)) {
+    return res.send('Esse item já existe na lista!')
+  }
   // Atualizamos na lista o novoItem pelo Id - 1 
   lista[id - 1] = novoItem
 
