@@ -7,13 +7,13 @@ app.get('/', function (req, res) {
 
 const lista = ['Java', 'Kotlin', 'Android']
 
-  // EndPoint Read All '[GET] /personagem'
+// EndPoint Read All '[GET] /personagem'
 
 app.get('/personagem', function (req, res) {
   res.send(lista)
 })
 
-  // EndPoint Read BY ID [GET]/personagem/:id
+// EndPoint Read BY ID [GET]/personagem/:id
 app.get('/personagem/:id', function (req, res) {
   // Acessando os parametros de rota ID
   const id = req.params.id
@@ -29,20 +29,37 @@ app.get('/personagem/:id', function (req, res) {
 app.use(express.json())
 
 // EndPoint Create [POST] /personagem
-app.post('/personagem', function(req, res) {
-// Acessando o body na requisição
+app.post('/personagem', function (req, res) {
+  // Acessando o body na requisição
   const body = req.body
 
-//Acessamos a propriedade 'nome' do body
+  //Acessamos a propriedade 'nome' do body
   const novoItem = body.nome
 
   //Adicionamos nome na lista
   lista.push(novoItem)
 
   //Exibimos uma mensagem de sucesso 
-  res.send('Item adicionado com sucesso:'+ novoItem)  
-  
- //res.send('Create')
+  res.send('Item adicionado com sucesso:' + novoItem)
+
+})
+//EndPoint Update [PUT]/personagem/:id 
+app.put('/personagem/:id', function (req, res) {
+  //Acessamos o ID dos parâmetros da rota
+  const id = req.params.id
+
+  // Acessamos o Bory de requisição 
+  const bory = req.body
+
+  // Acessamos a propriedade nome do Bory
+  const novoItem = bory.nome
+
+  // Atualizamos na lista o novoItem pelo Id - 1 
+  lista[id - 1] = novoItem
+
+  // Eviamos uma mensagem de sucesso 
+  res.send('Item atualizado com sucesso : ' + id + '-' + novoItem)
+
 })
 
 
